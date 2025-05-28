@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - Page de Connexion ENT UM5</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #002147;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        h2 {
+            color: #007B8A;
+            border-bottom: 2px solid #007B8A;
+            padding-bottom: 8px;
+            margin-top: 40px;
+        }
+        h3 {
+            color: #002147;
+            margin-top: 25px;
+        }
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        code {
+            background-color: #f5f5f5;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        pre {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            line-height: 1.4;
+        }
+        .note {
+            background-color: #e6f3ff;
+            border-left: 4px solid #007B8A;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 5px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #007B8A;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .file-structure {
+            font-family: monospace;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .highlight {
+            background-color: #ffee99;
+            padding: 2px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Documentation Page de Connexion ENT UM5</h1>
+        <p>École Supérieure de Technologie de Salé - Université Mohammed V Rabat</p>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2>1. Introduction</h2>
+            <p>Ce document détaille la création et l'implémentation d'une page de connexion moderne et professionnelle 
+            pour l'Environnement Numérique de Travail (ENT) de l'École Supérieure de Technologie de Salé, 
+            faisant partie de l'Université Mohammed V de Rabat.</p>
+            
+            <div class="note">
+                <strong>Public cible :</strong> Cette documentation s'adresse aux débutants en développement web 
+                et explique chaque étape du processus de création.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>2. Technologies Utilisées</h2>
+            <table>
+                <tr>
+                    <th>Technologie</th>
+                    <th>Version</th>
+                    <th>Rôle</th>
+                </tr>
+                <tr>
+                    <td>React</td>
+                    <td>18</td>
+                    <td>Bibliothèque JavaScript pour créer l'interface utilisateur</td>
+                </tr>
+                <tr>
+                    <td>Vite</td>
+                    <td>Latest</td>
+                    <td>Outil de build rapide pour les applications web modernes</td>
+                </tr>
+                <tr>
+                    <td>TypeScript</td>
+                    <td>Latest</td>
+                    <td>Superset de JavaScript ajoutant le typage statique</td>
+                </tr>
+                <tr>
+                    <td>Tailwind CSS</td>
+                    <td>3.4</td>
+                    <td>Framework CSS utilitaire pour le design</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>3. Création du Projet</h2>
+            
+            <h3>3.1. Initialisation avec Vite</h3>
+            <p>Nous avons utilisé Vite pour créer un projet React avec TypeScript :</p>
+            <pre>npm create vite@latest projet-ent-um5 -- --template react-ts</pre>
+            
+            <h3>3.2. Installation des Dépendances</h3>
+            <pre>cd projet-ent-um5
+npm install</pre>
+            
+            <h3>3.3. Installation et Configuration de Tailwind CSS</h3>
+            <pre>npm install -D tailwindcss@3.4 postcss autoprefixer
+npx tailwindcss init -p</pre>
+            
+            <p>Configuration du fichier <code>tailwind.config.js</code> :</p>
+            <pre>/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        primary: "#002147", // dark blue
+        secondary: "#007B8A", // turquoise
+        lightgray: "#F5F5F5"
+      },
+    },
+  },
+  plugins: [],
+}</pre>
+            
+            <p>Mise à jour du fichier <code>src/index.css</code> pour inclure les directives Tailwind :</p>
+            <pre>@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global custom styles */
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}</pre>
+        </div>
+
+        <div class="section">
+            <h2>4. Structure du Projet</h2>
+            <p>Voici l'organisation des fichiers du projet :</p>
+            <div class="file-structure">
+projet-ent-um5/
+├── src/
+│   ├── components/
+│   │   └── auth/
+│   │       └── LoginPage.tsx   # Composant principal de connexion
+│   ├── docs/
+│   │   └── documentation.html  # Cette documentation
+│   ├── App.tsx                 # Composant racine de l'application
+│   └── index.css               # Styles globaux avec Tailwind
+├── tailwind.config.js          # Configuration de Tailwind CSS
+├── tsconfig.app.json           # Configuration TypeScript
+└── package.json                # Dépendances du projet
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>5. Le Composant LoginPage</h2>
+            
+            <h3>5.1. Structure TypeScript</h3>
+            <p>Le composant utilise TypeScript pour définir les types de données :</p>
+            <pre>// Types pour les rôles utilisateur
+type UserRole = 'student' | 'professor' | 'admin';
+
+// Interface pour l'état du formulaire
+interface FormState {
+  role: UserRole;
+  identifier: string;
+  password: string;
+}
+
+// Interface pour les erreurs du formulaire
+interface FormErrors {
+  identifier?: string;
+  password?: string;
+}</pre>
+
+            <h3>5.2. État du Composant</h3>
+            <p>Utilisation des hooks React pour gérer l'état :</p>
+            <pre>const [formState, setFormState] = useState<FormState>({
+  role: 'student',
+  identifier: '',
+  password: '',
+});
+
+const [formErrors, setFormErrors] = useState<FormErrors>({});
+const [isSubmitting, setIsSubmitting] = useState(false);</pre>
+
+            <h3>5.3. Fonctions de Validation</h3>
+            <p>La fonction <code>validateForm</code> vérifie que les champs sont remplis correctement :</p>
+            <pre>const validateForm = (): boolean => {
+  const errors: FormErrors = {};
+  
+  if (!formState.identifier.trim()) {
+    errors.identifier = 'L\'identifiant est requis';
+  } else if (formState.role !== 'student' && !formState.identifier.endsWith('@um5.ac.ma')) {
+    errors.identifier = 'Veuillez saisir une adresse email valide se terminant par @um5.ac.ma';
+  }
+  
+  if (!formState.password) {
+    errors.password = 'Le mot de passe est requis';
+  }
+  
+  setFormErrors(errors);
+  return Object.keys(errors).length === 0;
+};</pre>
+
+            <div class="note">
+                <strong>Point important :</strong> Pour les enseignants et administrateurs, 
+                nous vérifions que l'email se termine par "@um5.ac.ma".
+            </div>
+
+            <h3>5.4. Gestion des Événements</h3>
+            <p>La fonction <code>handleInputChange</code> met à jour l'état du formulaire :</p>
+            <pre>const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const { name, value } = e.target;
+  setFormState(prev => ({ ...prev, [name]: value }));
+  
+  // Effacer l'erreur quand l'utilisateur commence à taper
+  if (formErrors[name as keyof FormErrors]) {
+    setFormErrors(prev => ({ ...prev, [name]: undefined }));
+  }
+};</pre>
+
+            <p>La fonction <code>handleSubmit</code> gère la soumission du formulaire :</p>
+            <pre>const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
+  
+  if (validateForm()) {
+    setIsSubmitting(true);
+    
+    // Simulation d'appel API
+    setTimeout(() => {
+      console.log('Credentials submitted:', formState);
+      setIsSubmitting(false);
+    }, 1500);
+  }
+};</pre>
+        </div>
+
+        <div class="section">
+            <h2>6. Structure de l'Interface Utilisateur</h2>
+            
+            <h3>6.1. Layout à Deux Colonnes</h3>
+            <p>L'interface est divisée en deux colonnes principales :</p>
+            <pre>// Structure principale
+<div className="flex flex-col md:flex-row min-h-screen bg-white">
+  {/* Colonne gauche - Branding */}
+  <div className="bg-primary md:w-1/2 flex flex-col justify-center p-8 text-white">
+    {/* Contenu de branding */}
+  </div>
+  
+  {/* Colonne droite - Formulaire */}
+  <div className="md:w-1/2 flex items-center justify-center p-8 bg-lightgray">
+    {/* Formulaire de connexion */}
+  </div>
+</div></pre>
+
+            <div class="note">
+                <strong>Design responsif :</strong> La structure utilise <code>flex-col</code> sur mobile et <code>md:flex-row</code> sur desktop,
+                créant une disposition empilée sur petits écrans et côte à côte sur grands écrans.
+            </div>
+
+            <h3>6.2. Colonne de Branding</h3>
+            <p>La colonne gauche contient les informations institutionnelles :</p>
+            <pre>// Colonne gauche - Branding
+<div className="bg-primary md:w-1/2 flex flex-col justify-center p-8 text-white">
+  <div className="max-w-md mx-auto space-y-8">
+    <div className="space-y-2">
+      <h1 className="text-3xl font-bold">École Supérieure de Technologie de Salé</h1>
+      <h2 className="text-xl">Université Mohammed V Rabat</h2>
+    </div>
+    
+    <div className="my-12">
+      <p className="text-lg opacity-90">
+        Plateforme numérique de l'Université permettant aux étudiants, enseignants et administrateurs
+        d'accéder aux services pédagogiques et administratifs de l'établissement.
+      </p>
+    </div>
+    
+    <div className="pt-6">
+      <div className="flex items-center space-x-4">
+        <div className="w-24 h-24 bg-white rounded-xl p-2 flex justify-center items-center">
+          <div className="text-primary font-bold text-center">LOGO UM5</div>
+        </div>
+        <div className="w-24 h-24 bg-white rounded-xl p-2 flex justify-center items-center">
+          <div className="text-primary font-bold text-center">LOGO EST</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></pre>
+
+            <h3>6.3. Formulaire de Connexion</h3>
+            <p>La colonne droite contient le formulaire :</p>
+            <pre>// Colonne droite - Formulaire
+<div className="md:w-1/2 flex items-center justify-center p-8 bg-lightgray">
+  <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
+    <div className="mb-8 text-center">
+      <h2 className="text-2xl font-bold text-primary">Connexion à votre espace</h2>
+      <p className="text-gray-600 mt-2">Veuillez vous authentifier pour accéder à l'ENT</p>
+    </div>
+    
+    <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Éléments du formulaire */}
+    </form>
+  </div>
+</div></pre>
+        </div>
+
+        <div class="section">
+            <h2>7. Éléments du Formulaire</h2>
+            
+            <h3>7.1. Sélection du Rôle</h3>
+            <pre>// Sélection du rôle
+<div>
+  <label htmlFor="role" className="block text-sm font-medium text-gray-700 mb-1">
+    Je suis
+  </label>
+  <select
+    id="role"
+    name="role"
+    value={formState.role}
+    onChange={handleInputChange}
+    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-200"
+  >
+    <option value="student">Étudiant</option>
+    <option value="professor">Enseignant</option>
+    <option value="admin">Administrateur</option>
+  </select>
+</div></pre>
+
+            <h3>7.2. Champ d'Identifiant</h3>
+            <p>Ce champ change dynamiquement selon le rôle sélectionné :</p>
+            <pre>// Champ d'identifiant
+<div>
+  <label htmlFor="identifier" className="block text-sm font-medium text-gray-700 mb-1">
+    {formState.role === 'student' ? 'Numéro de matricule' : 'Email institutionnel'}
+  </label>
+  <input
+    type={formState.role === 'student' ? 'text' : 'email'}
+    id="identifier"
+    name="identifier"
+    value={formState.identifier}
+    onChange={handleInputChange}
+    className={`w-full px-4 py-3 rounded-xl border ${
+      formErrors.identifier ? 'border-red-500' : 'border-gray-300'
+    } focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-200`}
+    placeholder={formState.role === 'student' ? 'Ex: 20205689' : 'prenom_nom@um5.ac.ma'}
+  />
+  {formErrors.identifier && (
+    <p className="mt-1 text-sm text-red-600">{formErrors.identifier}</p>
+  )}
+</div></pre>
+
+            <div class="note">
+                <strong>Adaptation dynamique :</strong> Le type d'input, le libellé et le placeholder changent 
+                en fonction du rôle sélectionné.
+            </div>
+
+            <h3>7.3. Champ de Mot de Passe</h3>
+            <pre>// Champ de mot de passe
+<div>
+  <div className="flex justify-between mb-1">
+    <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+      Mot de passe
+    </label>
+    <a href="#" className="text-sm text-secondary hover:underline">
+      Mot de passe oublié ?
+    </a>
+  </div>
+  <input
+    type="password"
+    id="password"
+    name="password"
+    value={formState.password}
+    onChange={handleInputChange}
+    className={`w-full px-4 py-3 rounded-xl border ${
+      formErrors.password ? 'border-red-500' : 'border-gray-300'
+    } focus:outline-none focus:ring-2 focus:ring-secondary focus:border-secondary transition-all duration-200`}
+    placeholder="Votre mot de passe"
+  />
+  {formErrors.password && (
+    <p className="mt-1 text-sm text-red-600">{formErrors.password}</p>
+  )}
+</div></pre>
+
+            <h3>7.4. Bouton de Connexion avec Animation</h3>
+            <pre>// Bouton de connexion
+<div>
+  <button
+    type="submit"
+    disabled={isSubmitting}
+    className="w-full bg-secondary hover:bg-secondary/90 text-white font-medium py-3 px-4 rounded-xl transition-all duration-200 flex justify-center items-center"
+  >
+    {isSubmitting ? (
+      <>
+        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        Connexion en cours...
+      </>
+    ) : (
+      'Se connecter'
+    )}
+  </button>
+</div></pre>
+        </div>
+
+        <div class="section">
+            <h2>8. Intégration dans l'Application</h2>
+            <p>Le composant est intégré dans l'application via <code>App.tsx</code> :</p>
+            <pre>// App.tsx
+import LoginPage from './components/auth/LoginPage'
+
+function App() {
+  return <LoginPage />
+}
+
+export default App</pre>
+        </div>
+
+        <div class="section">
+            <h2>9. Comment Exécuter le Projet</h2>
+            <ol>
+                <li>Ouvrir un terminal dans le dossier du projet</li>
+                <li>Installer les dépendances : <code>npm install</code></li>
+                <li>Démarrer le serveur de développement : <code>npm run dev</code></li>
+                <li>Accéder à l'application dans le navigateur à l'adresse affichée (généralement http://localhost:5174)</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>10. Concepts Clés Expliqués</h2>
+            
+            <h3>10.1. React Hooks</h3>
+            <p>Ce projet utilise <code>useState</code> pour gérer l'état du composant :</p>
+            <ul>
+                <li><code>useState</code>: Permet de gérer l'état local d'un composant</li>
+            </ul>
+
+            <h3>10.2. TypeScript</h3>
+            <p>TypeScript nous permet de définir des types pour nos données :</p>
+            <ul>
+                <li><code>type UserRole = 'student' | 'professor' | 'admin'</code>: Un type union qui limite les valeurs possibles</li>
+                <li><code>interface FormState {...}</code>: Une interface qui définit la structure de l'état du formulaire</li>
+            </ul>
+
+            <h3>10.3. Tailwind CSS</h3>
+            <p>Nous utilisons des classes utilitaires pour styler les éléments :</p>
+            <ul>
+                <li><code>flex flex-col md:flex-row</code>: Disposition flexible qui change selon la taille de l'écran</li>
+                <li><code>text-primary</code>: Couleur personnalisée définie dans tailwind.config.js</li>
+                <li><code>rounded-xl</code>: Coins arrondis</li>
+                <li><code>transition-all duration-200</code>: Animations fluides</li>
+            </ul>
+
+            <h3>10.4. Validation Conditionnelle</h3>
+            <p>La validation change selon le rôle de l'utilisateur :</p>
+            <ul>
+                <li>Pour les étudiants : Vérification que le champ n'est pas vide</li>
+                <li>Pour les enseignants et administrateurs : Vérification que l'email se termine par "@um5.ac.ma"</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>11. Conclusion</h2>
+            <p>Ce projet démontre comment créer une page de connexion moderne et professionnelle avec React, TypeScript et Tailwind CSS. 
+            Il est conçu pour être facilement compréhensible et modifiable, tout en respectant les meilleures pratiques de développement.</p>
+
+            <div class="note">
+                <strong>Pour aller plus loin :</strong> Vous pourriez ajouter une intégration back-end réelle, 
+                améliorer l'accessibilité, ou ajouter des fonctionnalités comme la persistance du rôle choisi.
+            </div>
+        </div>
+    </div>
+
+    <footer style="background-color: #002147; color: white; text-align: center; padding: 20px; margin-top: 50px;">
+        <p>© 2025 Université Mohammed V de Rabat - École Supérieure de Technologie de Salé</p>
+    </footer>
+</body>
+</html>
