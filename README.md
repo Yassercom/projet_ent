@@ -15,25 +15,31 @@ Bienvenue sur l’Espace Numérique de Travail de l’EST Salé.  Connectez-vous
    git clone https://github.com/your-username/your-repo.git
 Navigate to project directory:
 
-bash
+```bash
 cd your-repo
 Install dependencies:
+```
 
-bash
+```bash
 npm install
+```
 Running the Development Server
-bash
+```bash
 npm run dev
+```
 Opens at: http://localhost:5173
 
 Building for Production
-bash
+```bash
 npm run build
+```
 Generates production-ready files in /dist directory
 
 Previewing Production Build
-bash
+```bash
 npm run preview
+```
+```
 Project Structure
 ├── node_modules/     # Dependencies (auto-generated)
 ├── public/           # Static assets
@@ -49,33 +55,39 @@ Project Structure
 ├── package.json
 ├── tsconfig.json     # TypeScript config
 └── vite.config.ts    # Vite configuration
+```
 Environment Variables
 Create .env file in root directory:
 
-env
+```env
 VITE_API_KEY=your_api_key_here
 VITE_API_URL=https://api.example.com
+```
 Access in code:
 
-ts
+```ts
 const apiKey = import.meta.env.VITE_API_KEY;
+```
 Troubleshooting
 Dependency issues:
 
-bash
+```bash
 rm -rf node_modules package-lock.json
 npm cache clean --force
 npm install
+```
 Port conflict: Update port in vite.config.ts:
 
-ts
+```ts
 export default defineConfig({
   server: { port: 3000 }  // Change to available port
 })
+```
 TypeScript errors:
 
-bash
+```bash
 npm run build
+```
 Recommended VS Code Extensions
 ESLint
 
